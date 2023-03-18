@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - JWT_SECRET=mysecretpassword
+      - JWT_REFRESH_SECRET=myrefreshsecretpassword
+      - MONGODB_URI=mongodb://mongo:27017/my_auth_app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_DATABASE=my_auth_app
